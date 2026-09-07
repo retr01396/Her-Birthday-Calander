@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database Container
+  postgres:
+    image: postgres:16-alpine
+    container_name: campushub_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: campus_admin
+      POSTGRES_PASSWORD: supersecretpassword
+      POSTGRES_DB: campushub_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - campushub_net
+
+  # Redis Cache Container
+  redis:
+    image: redis:7-alpine
+    container_name: campushub_redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - campushub_net
+
+  # Postal Mail Server Container
+  postal:
+    image: ghcr.io/postalserver/postal:v2.1
+    container_name: postal_app
+    command: postal web-server
+    restart: always
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./config/postal.yml:/config/postal.yml:ro
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - campushub_net
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  campushub_net:
+    driver: bridge

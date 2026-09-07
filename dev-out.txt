@@ -1,0 +1,253 @@
+
+> campushub-demo@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.11 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://172.25.112.1:3000
+- Environments: .env
+✓ Ready in 10.6s
+⚠ Slow filesystem detected. The benchmark took 371ms. If E:\Downloads\CampusHub-Demo-main (2)\CampusHub-Demo-main\.next/dev is a network drive, consider moving it to a local folder.
+See more: https://nextjs.org/docs/app/guides/local-development
+○ Compiling middleware ...
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+
+ GET /api/onboarding/organizations 200 in 6.9s (next.js: 6.4s, application-code: 527ms)
+ GET /api/onboarding/organizations 200 in 197ms (next.js: 31ms, application-code: 166ms)
+ GET / 200 in 2.3s (next.js: 1814ms, application-code: 466ms)
+ GET / 200 in 241ms (next.js: 57ms, application-code: 184ms)
+ POST / 200 in 1358ms (next.js: 296ms, application-code: 1063ms)
+  └─ ƒ getAllUpcomingEvents() in 457ms src/app/actions/unifiedActions.ts
+ POST / 200 in 48ms (next.js: 14ms, application-code: 33ms)
+  └─ ƒ getAllClubsPublic() in 7ms src/app/actions/unifiedActions.ts
+○ Compiling /api/auth/me ...
+ GET /?auth=1 200 in 504ms (next.js: 29ms, application-code: 475ms)
+ POST /?auth=1 200 in 78ms (next.js: 16ms, application-code: 63ms)
+  └─ ƒ getAllUpcomingEvents() in 22ms src/app/actions/unifiedActions.ts
+ POST /?auth=1 200 in 85ms (next.js: 28ms, application-code: 57ms)
+  └─ ƒ getAllClubsPublic() in 10ms src/app/actions/unifiedActions.ts
+[auth/me] error: Error: Redis is not available
+    at redisCmd (src\lib\redis.ts:49:13)
+    at getSessionUserId (src\lib\session.ts:65:32)
+    at async getCurrentUser (src\lib\session.ts:74:18)
+    at async GET (src\app\api\auth\me\route.ts:6:18)
+  47 |     }
+  48 |     if (!redis.isReady) {
+> 49 |       throw new Error("Redis is not available");
+     |             ^
+  50 |     }
+  51 |   }
+  52 |   return fn(redis);
+ GET /api/auth/me 200 in 4.9s (next.js: 4.4s, application-code: 463ms)
+ GET /api/onboarding/organizations 200 in 168ms (next.js: 10ms, application-code: 158ms)
+ GET /api/onboarding/organizations 200 in 55ms (next.js: 26ms, application-code: 29ms)
+✓ Compiled in 6.6s
+ GET /?auth=1 200 in 2.0s (next.js: 1139ms, application-code: 906ms)
+ GET /?auth=1 200 in 271ms (next.js: 31ms, application-code: 240ms)
+ GET /?auth=1 200 in 1040ms (next.js: 44ms, application-code: 995ms)
+ GET /api/auth/me 200 in 698ms (next.js: 197ms, application-code: 502ms)
+ POST /?auth=1 200 in 616ms (next.js: 59ms, application-code: 557ms)
+  └─ ƒ getAllUpcomingEvents() in 394ms src/app/actions/unifiedActions.ts
+ POST /?auth=1 200 in 45ms (next.js: 6ms, application-code: 39ms)
+  └─ ƒ getAllClubsPublic() in 20ms src/app/actions/unifiedActions.ts
+ GET /api/onboarding/organizations 200 in 198ms (next.js: 52ms, application-code: 146ms)
+ GET /api/onboarding/organizations 200 in 21ms (next.js: 4ms, application-code: 17ms)
+ POST /api/auth/register 200 in 3.6s (next.js: 1076ms, application-code: 2.5s)
+ GET /api/auth/me 200 in 28ms (next.js: 6ms, application-code: 23ms)
+ GET /api/auth/me 200 in 24ms (next.js: 9ms, application-code: 15ms)
+ GET /clubs/creative-media 200 in 19.8s (next.js: 16.2s, application-code: 3.5s)
+ GET /clubs/creative-media 200 in 1090ms (next.js: 20ms, application-code: 1070ms)
+ POST /clubs/creative-media 200 in 3.1s (next.js: 66ms, application-code: 3.0s)
+  └─ ƒ applyToClub("cmssxav040012houth3nh9p1q", {"field_track":"Photography","field_why":"I love capturing campus stories through photos.","fullName":"Test Joiner","...":"2 items not stringified"}) in 686ms src/app/actions/clubActions.ts
+ GET /?auth=1 200 in 66ms (next.js: 5ms, application-code: 62ms)
+ POST /?auth=1 200 in 139ms (next.js: 9ms, application-code: 130ms)
+  └─ ƒ getAllUpcomingEvents() in 98ms src/app/actions/unifiedActions.ts
+ POST /?auth=1 200 in 39ms (next.js: 9ms, application-code: 31ms)
+  └─ ƒ getAllClubsPublic() in 9ms src/app/actions/unifiedActions.ts
+ GET /api/auth/me 200 in 294ms (next.js: 4ms, application-code: 290ms)
+ POST /api/auth/signin 200 in 669ms (next.js: 339ms, application-code: 331ms)
+ GET /api/auth/me 200 in 21ms (next.js: 4ms, application-code: 16ms)
+ GET /api/auth/me 200 in 46ms (next.js: 12ms, application-code: 34ms)
+ GET /api/auth/me 200 in 112ms (next.js: 39ms, application-code: 73ms)
+ GET /club/dashboard 200 in 2.1s (next.js: 649ms, proxy.ts: 148ms, application-code: 1329ms)
+ GET /api/auth/me 200 in 93ms (next.js: 6ms, application-code: 87ms)
+ GET /api/auth/me 200 in 25ms (next.js: 5ms, application-code: 20ms)
+ GET /club/dashboard 200 in 178ms (next.js: 5ms, proxy.ts: 34ms, application-code: 139ms)
+ GET /api/auth/me 200 in 455ms (next.js: 11ms, application-code: 444ms)
+✓ Compiled in 24.3s
+ GET /club/dashboard 200 in 5.5s (next.js: 3.5s, proxy.ts: 477ms, application-code: 1529ms)
+ GET /api/auth/me 200 in 466ms (next.js: 301ms, application-code: 165ms)
+ GET /api/auth/me 200 in 43ms (next.js: 16ms, application-code: 27ms)
+ GET /club/dashboard 200 in 1148ms (next.js: 240ms, proxy.ts: 552ms, application-code: 356ms)
+ GET /api/auth/me 200 in 92ms (next.js: 19ms, application-code: 73ms)
+ GET /api/auth/me 200 in 129ms (next.js: 15ms, application-code: 113ms)
+ GET /api/auth/me 200 in 128ms (next.js: 26ms, application-code: 102ms)
+ GET /api/auth/me 200 in 122ms (next.js: 33ms, application-code: 88ms)
+ GET /club/dashboard 200 in 454ms (next.js: 30ms, proxy.ts: 70ms, application-code: 354ms)
+ GET /api/auth/me 200 in 145ms (next.js: 15ms, application-code: 130ms)
+ GET /club/dashboard 200 in 708ms (next.js: 61ms, proxy.ts: 177ms, application-code: 470ms)
+ GET /club/dashboard 200 in 718ms (next.js: 42ms, proxy.ts: 283ms, application-code: 392ms)
+ GET /club/dashboard 200 in 894ms (next.js: 92ms, proxy.ts: 286ms, application-code: 516ms)
+ GET /club/dashboard 200 in 905ms (next.js: 136ms, proxy.ts: 284ms, application-code: 485ms)
+ GET /club/dashboard 200 in 1138ms (next.js: 78ms, proxy.ts: 403ms, application-code: 657ms)
+ GET /api/auth/me 200 in 64ms (next.js: 4ms, application-code: 59ms)
+ GET /club/dashboard 200 in 476ms (next.js: 6ms, proxy.ts: 77ms, application-code: 394ms)
+ GET /api/auth/me 200 in 90ms (next.js: 5ms, application-code: 86ms)
+ POST /club/dashboard 200 in 346ms (next.js: 6ms, proxy.ts: 133ms, application-code: 208ms)
+  └─ ƒ updateClubMembershipForm("cmssxatxh000ehout537jx7k7", {"customFormFields":["[Object]"],"whatsappGroupUrl":"https://chat.whatsapp.com/TechInnovators-Demo2026"}) in 28ms src/app/actions/clubActions.ts
+ GET /api/auth/me 200 in 24ms (next.js: 5ms, application-code: 19ms)
+ GET /club/dashboard 200 in 177ms (next.js: 7ms, proxy.ts: 59ms, application-code: 111ms)
+ GET / 200 in 363ms (next.js: 299ms, application-code: 64ms)
+[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior (file://E:/Downloads/CampusHub-Demo-main (2)
+ POST / 200 in 747ms (next.js: 193ms, application-code: 554ms)
+  └─ ƒ getAllUpcomingEvents() in 461ms src/app/actions/unifiedActions.ts
+ POST / 200 in 102ms (next.js: 15ms, application-code: 86ms)
+  └─ ƒ getAllClubsPublic() in 17ms src/app/actions/unifiedActions.ts
+ POST / 200 in 65ms (next.js: 16ms, application-code: 49ms)
+  └─ ƒ getAllUpcomingEvents() in 17ms src/app/actions/unifiedActions.ts
+ GET /api/auth/me 200 in 1013ms (next.js: 178ms, application-code: 835ms)
+ POST / 200 in 99ms (next.js: 18ms, application-code: 81ms)
+  └─ ƒ getAllClubsPublic() in 39ms src/app/actions/unifiedActions.ts
+ GET /api/auth/me 200 in 61ms (next.js: 14ms, application-code: 47ms)
+ GET /api/auth/me 200 in 155ms (next.js: 4ms, application-code: 151ms)
+ GET /club/dashboard 200 in 331ms (next.js: 14ms, proxy.ts: 172ms, application-code: 145ms)
+ GET /api/auth/me 200 in 15ms (next.js: 5ms, application-code: 10ms)
+ GET /club/dashboard/events/cmssxav6f001hhoutpj6e5xuk/form-builder 200 in 9.4s (next.js: 9.1s, proxy.ts: 24ms, application-code: 268ms)
+ GET /api/auth/me 200 in 96ms (next.js: 5ms, application-code: 92ms)
+ GET /club/dashboard 200 in 189ms (next.js: 7ms, proxy.ts: 106ms, application-code: 76ms)
+[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior (file://E:/Downloads/CampusHub-Demo-main (2)
+✓ Finished filesystem cache database compaction in 39.8s
+✓ Compiled in 28.9s
+ GET /api/auth/me 200 in 10.6s (next.js: 3ms, application-code: 10.6s)
+ GET /club/dashboard 200 in 13.8s (next.js: 1685ms, proxy.ts: 10.7s, application-code: 1459ms)
+ GET /api/auth/me 200 in 1121ms (next.js: 998ms, application-code: 123ms)
+ GET /api/auth/me 200 in 51ms (next.js: 10ms, application-code: 42ms)
+ GET /club/dashboard 200 in 1594ms (next.js: 8ms, proxy.ts: 1311ms, application-code: 275ms)
+ GET /club/dashboard 200 in 316ms (next.js: 30ms, proxy.ts: 82ms, application-code: 204ms)
+ GET /api/auth/me 200 in 88ms (next.js: 18ms, application-code: 70ms)
+ GET /api/auth/me 200 in 95ms (next.js: 31ms, application-code: 64ms)
+ GET /api/auth/me 200 in 89ms (next.js: 38ms, application-code: 52ms)
+ GET /api/auth/me 200 in 74ms (next.js: 23ms, application-code: 51ms)
+ GET /api/auth/me 200 in 80ms (next.js: 6ms, application-code: 75ms)
+ GET /api/auth/me 200 in 292ms (next.js: 19ms, application-code: 274ms)
+ GET /club/dashboard 200 in 880ms (next.js: 51ms, proxy.ts: 192ms, application-code: 637ms)
+ GET /club/dashboard 200 in 887ms (next.js: 109ms, proxy.ts: 186ms, application-code: 592ms)
+ GET /api/auth/me 200 in 110ms (next.js: 18ms, application-code: 91ms)
+ GET /api/auth/me 200 in 123ms (next.js: 33ms, application-code: 90ms)
+ GET /club/dashboard 200 in 1078ms (next.js: 147ms, proxy.ts: 181ms, application-code: 750ms)
+ GET /api/auth/me 200 in 151ms (next.js: 42ms, application-code: 109ms)
+ GET /club/dashboard 200 in 1442ms (next.js: 164ms, proxy.ts: 332ms, application-code: 947ms)
+ GET /club/dashboard 200 in 687ms (next.js: 23ms, proxy.ts: 183ms, application-code: 481ms)
+ GET /club/dashboard 200 in 698ms (next.js: 83ms, proxy.ts: 184ms, application-code: 430ms)
+ GET /api/auth/me 200 in 80ms (next.js: 18ms, application-code: 62ms)
+ GET /api/auth/me 200 in 109ms (next.js: 18ms, application-code: 91ms)
+ GET /api/auth/me 200 in 125ms (next.js: 29ms, application-code: 96ms)
+ GET /club/dashboard 200 in 870ms (next.js: 24ms, proxy.ts: 315ms, application-code: 531ms)
+ GET /club/dashboard 200 in 2.1s (next.js: 150ms, proxy.ts: 446ms, application-code: 1499ms)
+ GET /api/auth/me 200 in 130ms (next.js: 34ms, application-code: 96ms)
+ GET /club/dashboard 200 in 883ms (next.js: 68ms, proxy.ts: 164ms, application-code: 651ms)
+ GET /api/auth/me 200 in 170ms (next.js: 24ms, application-code: 146ms)
+ GET /club/dashboard 200 in 902ms (next.js: 196ms, proxy.ts: 185ms, application-code: 521ms)
+ GET /club/dashboard 200 in 903ms (next.js: 176ms, proxy.ts: 242ms, application-code: 485ms)
+ GET /club/dashboard 200 in 2.6s (next.js: 204ms, proxy.ts: 197ms, application-code: 2.2s)
+ GET /api/auth/me 200 in 246ms (next.js: 34ms, application-code: 212ms)
+ GET /api/auth/me 200 in 349ms (next.js: 83ms, application-code: 266ms)
+ GET /api/auth/me 200 in 312ms (next.js: 94ms, application-code: 218ms)
+ GET /api/auth/me 200 in 245ms (next.js: 131ms, application-code: 114ms)
+ GET /club/dashboard 200 in 1132ms (next.js: 50ms, proxy.ts: 258ms, application-code: 825ms)
+ GET /club/dashboard 200 in 1379ms (next.js: 57ms, proxy.ts: 299ms, application-code: 1024ms)
+ GET /api/auth/me 200 in 240ms (next.js: 67ms, application-code: 173ms)
+ GET /api/auth/me 200 in 328ms (next.js: 47ms, application-code: 281ms)
+ GET /club/dashboard 200 in 1634ms (next.js: 62ms, proxy.ts: 504ms, application-code: 1069ms)
+ GET /club/dashboard 200 in 1630ms (next.js: 111ms, proxy.ts: 508ms, application-code: 1011ms)
+ GET /club/dashboard 200 in 1721ms (next.js: 89ms, proxy.ts: 663ms, application-code: 968ms)
+ GET /club/dashboard 200 in 1613ms (next.js: 194ms, proxy.ts: 550ms, application-code: 869ms)
+ GET /club/dashboard 200 in 1193ms (next.js: 171ms, proxy.ts: 626ms, application-code: 395ms)
+ GET /club/dashboard 200 in 848ms (next.js: 51ms, proxy.ts: 525ms, application-code: 273ms)
+ GET /api/auth/me 200 in 114ms (next.js: 4ms, application-code: 110ms)
+ GET /club/dashboard 200 in 1041ms (next.js: 11ms, proxy.ts: 127ms, application-code: 902ms)
+ GET /?auth=1 200 in 1908ms (next.js: 559ms, application-code: 1350ms)
+ POST /?auth=1 200 in 414ms (next.js: 15ms, application-code: 399ms)
+  └─ ƒ getAllUpcomingEvents() in 236ms src/app/actions/unifiedActions.ts
+ GET /api/auth/me 200 in 458ms (next.js: 258ms, application-code: 201ms)
+ POST /?auth=1 200 in 46ms (next.js: 12ms, application-code: 33ms)
+  └─ ƒ getAllClubsPublic() in 7ms src/app/actions/unifiedActions.ts
+ GET /api/onboarding/organizations 200 in 619ms (next.js: 534ms, application-code: 85ms)
+ GET /api/onboarding/organizations 200 in 23ms (next.js: 5ms, application-code: 18ms)
+[browser] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). 
+    at completeWork (file://E:/Downloads/CampusHub-Demo-main (2)/CampusHub-Demo-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6945:102)
+    at runWithFiberInDEV (file://E:/Downloads/CampusHub-Demo-main (2)/CampusHub-Demo-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at completeUnitOfWork (file://E:/Downloads/CampusHub-Demo-main (2)/CampusHub-Demo-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://E:/Downloads/CampusHub-Demo-main (2)/CampusHub-Demo-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://E:/Downloads/CampusHub-Demo-main (2)/CampusHub-Demo-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://E:/Downloads/CampusHub-Demo-main (2)/CampusHub-Demo-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://E:/Downloads/CampusHub-Demo-main (2)/CampusHub-Demo-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://E:/Downloads/CampusHub-Demo-main (2)/CampusHub-Demo-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://E:/Downloads/CampusHub-Demo-main (2)/CampusHub-Demo-main/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64) (file://E:/Downloads/CampusHub-Demo-main (2)
+ GET /clubs/robotics-ai?from=onboarding 200 in 3.4s (next.js: 828ms, application-code: 2.6s)
+[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior (file://E:/Downloads/CampusHub-Demo-main (2)
+ GET /auth 404 in 1047ms (next.js: 794ms, application-code: 253ms)
+ GET /auth 404 in 148ms (next.js: 9ms, application-code: 140ms)
+✓ Compiled in 643ms
+ GET /auth 404 in 211ms (next.js: 19ms, application-code: 191ms)
+ GET /auth 404 in 388ms (next.js: 102ms, application-code: 286ms)
+ GET /auth 404 in 358ms (next.js: 51ms, application-code: 306ms)
+✓ Compiled in 326ms
+ GET /auth 404 in 333ms (next.js: 48ms, application-code: 285ms)
+ GET /auth 404 in 529ms (next.js: 94ms, application-code: 436ms)
+ GET /auth 404 in 474ms (next.js: 148ms, application-code: 326ms)
+ GET /?auth=1 200 in 353ms (next.js: 136ms, application-code: 216ms)
+ POST /?auth=1 200 in 570ms (next.js: 22ms, application-code: 548ms)
+  └─ ƒ getAllUpcomingEvents() in 247ms src/app/actions/unifiedActions.ts
+ POST /?auth=1 200 in 36ms (next.js: 7ms, application-code: 29ms)
+  └─ ƒ getAllClubsPublic() in 11ms src/app/actions/unifiedActions.ts
+ GET /api/auth/me 200 in 1421ms (next.js: 719ms, application-code: 702ms)
+ GET /api/onboarding/organizations 200 in 167ms (next.js: 79ms, application-code: 89ms)
+ GET /api/onboarding/organizations 200 in 19ms (next.js: 4ms, application-code: 15ms)
+ GET /clubs/robotics-ai?from=onboarding 200 in 1383ms (next.js: 384ms, application-code: 998ms)
+[browser] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). 
+    at completeWork (file://E:/Downloads/CampusHub-Demo-main (2)/CampusHub-Demo-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6945:102)
+    at runWithFiberInDEV (file://E:/Downloads/CampusHub-Demo-main (2)/CampusHub-Demo-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at completeUnitOfWork (file://E:/Downloads/CampusHub-Demo-main (2)/CampusHub-Demo-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://E:/Downloads/CampusHub-Demo-main (2)/CampusHub-Demo-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://E:/Downloads/CampusHub-Demo-main (2)/CampusHub-Demo-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://E:/Downloads/CampusHub-Demo-main (2)/CampusHub-Demo-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://E:/Downloads/CampusHub-Demo-main (2)/CampusHub-Demo-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://E:/Downloads/CampusHub-Demo-main (2)/CampusHub-Demo-main/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://E:/Downloads/CampusHub-Demo-main (2)/CampusHub-Demo-main/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64) (file://E:/Downloads/CampusHub-Demo-main (2)
+[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior (file://E:/Downloads/CampusHub-Demo-main (2)
+ GET /clubs/robotics-ai 200 in 1946ms (next.js: 21ms, application-code: 1925ms)
+ GET /api/auth/me 200 in 117ms (next.js: 7ms, application-code: 110ms)
+ GET /admin 200 in 1186ms (next.js: 571ms, proxy.ts: 192ms, application-code: 423ms)
+[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior (file://E:/Downloads/CampusHub-Demo-main (2)
+ GET /api/auth/me 200 in 26ms (next.js: 5ms, application-code: 21ms)
+○ Compiling /admin/users ...
+ GET /admin/users 200 in 23.9s (next.js: 23.5s, proxy.ts: 38ms, application-code: 366ms)
+ GET /api/auth/me 200 in 18ms (next.js: 3ms, application-code: 14ms)
+ POST /admin/users 200 in 76ms (next.js: 5ms, proxy.ts: 31ms, application-code: 40ms)
+  └─ ƒ getAdminUsersList({}) in 18ms src/app/actions/adminUsers.ts
+✓ Finished filesystem cache database compaction in 28.4s
+[redis] client error: Socket closed unexpectedly
+[redis] client error: Socket closed unexpectedly
+[redis] client error: Socket closed unexpectedly
+[redis] client error: read ECONNRESET
+[redis] client error: read ECONNRESET
+[redis] client error: Socket closed unexpectedly
+[redis] client error: Socket closed unexpectedly
+[redis] client error: Socket closed unexpectedly
+[redis] client error: Socket closed unexpectedly
+[redis] client error: Socket closed unexpectedly
+[redis] client error: Socket closed unexpectedly
+[redis] client error: Socket closed unexpectedly
+[redis] client error: Socket closed unexpectedly
+[redis] client error: Socket closed unexpectedly
+[redis] client error: Socket closed unexpectedly
+[redis] client error: Socket closed unexpectedly
+[redis] client error: Socket closed unexpectedly
+[redis] client error: Socket closed unexpectedly
+[redis] client error: Socket closed unexpectedly
+[redis] client error: Socket closed unexpectedly
+[redis] client error: Socket closed unexpectedly
+[redis] client error: read ECONNRESET
+[redis] client error: read ECONNRESET
+[redis] client error: 

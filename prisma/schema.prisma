@@ -1,0 +1,476 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum SystemRole {
+  STUDENT
+  SUPER_ADMIN
+}
+
+enum PostType {
+  EVENT_RECAP
+  CONGRATULATIONS
+  ANNOUNCEMENT
+}
+
+enum ClubRole {
+  MEMBER
+  OFFICER
+  TREASURER
+  LEADER
+}
+
+enum ClubCategory {
+  PROFESSIONAL_BODY
+  GENERAL
+}
+
+enum ClubStatus {
+  UNPUBLISHED
+  PUBLISHED
+  SUSPENDED
+}
+
+enum OtpPurpose {
+  REGISTRATION
+  FORGOT_PASSWORD
+  CHANGE_PASSWORD
+  EMAIL_VERIFICATION
+}
+
+enum BookingStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum RegistrationStatus {
+  PENDING
+  REGISTERED
+  ATTENDED
+  CANCELLED
+  REJECTED
+}
+
+enum VerificationStatus {
+  NOT_REQUIRED
+  PENDING_ADMIN_VERIFICATION
+  APPROVED
+  REVERTED
+  REJECTED
+}
+
+enum RegistrationType {
+  INTERNAL
+  EXTERNAL
+}
+
+enum ExternalProvider {
+  MAKEMYPASS
+  RSVP
+  OTHERS
+}
+
+enum TeamPassStrategy {
+  CAPTAIN_ONLY
+  INDIVIDUAL
+}
+
+enum PointStatus {
+  ACTIVE
+  REVERTED
+}
+
+model SystemConfig {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String
+  // Usage: key="ACADEMIC_YEAR_START", value="2025-07-01"
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model User {
+  id                  String     @id @default(cuid())
+  email               String     @unique
+  name                String
+  handle              String     @unique
+  password            String
+  role                SystemRole @default(STUDENT)
+  createdAt           DateTime   @default(now())
+  department          String?
+  yearOfStudy         String? // "1st Year" | "2nd Year" | "3rd Year" | "4th Year"
+  emailVerified       DateTime?
+  division            String?
+  onboardingCompleted Boolean    @default(false)
+  totalPoints         Int        @default(0)
+
+  memberships        ClubMember[]
+  registrations      Registration[]
+  sessions           Session[]
+  roomBookings       RoomBooking[]
+  verificationTokens VerificationToken[]
+  postWinnerTags     PostWinnerTag[]
+  postLikes          PostLike[]
+  pointLogs          PointTransaction[]
+
+  firstPlaceEvents  Event[] @relation("FirstPlace")
+  secondPlaceEvents Event[] @relation("SecondPlace")
+  thirdPlaceEvents  Event[] @relation("ThirdPlace")
+
+  teamsLed        Team[]       @relation("TeamLeader")
+  teamMemberships TeamMember[]
+  savedEvents     SavedEvent[]
+}
+
+model Club {
+  id                         String       @id @default(cuid())
+  name                       String       @unique
+  slug                       String?      @unique
+  username                   String       @unique
+  passwordHash               String
+  email                      String?      @unique
+  emailVerifiedAt            DateTime?
+  description                String
+  createdAt                  DateTime     @default(now())
+  about                      String?
+  coverUrl                   String?
+  github                     String?
+  instagram                  String?
+  logoUrl                    String?
+  tagline                    String?
+  website                    String?
+  category                   ClubCategory @default(GENERAL)
+  discord                    String?
+  recruitmentStatus          String       @default("CLOSED")
+  suspended                  Boolean      @default(false)
+  whatsappGroupUrl           String?
+  customFormFields           Json?
+  // When true, students who apply to join stay PENDING until the club reviews
+  // their application form and approves them. When false, joining is instant
+  // (application answers are still recorded but membership is immediate).
+  membershipRequiresApproval Boolean      @default(false)
+  status                     ClubStatus   @default(UNPUBLISHED)
+  updatedAt                  DateTime     @updatedAt
+  points                     Int          @default(0)
+
+  members   ClubMember[]
+  events    Event[]
+  gigs      RecruitmentGig[]
+  posts     ClubPost[]
+  pointLogs PointTransaction[]
+
+  // Roster Studio design settings (layout, frames, typography, colors).
+  rosterSettings Json?
+}
+
+model ClubMember {
+  id                 String   @id @default(cuid())
+  // Null for free-form roster entries added by the club (e.g. faculty or
+  // guests without a student account). Linked students have a userId.
+  userId             String?
+  clubId             String
+  clubRole           ClubRole @default(MEMBER)
+  roleTitle          String?  @default("Member")
+  isExecutive        Boolean  @default(false)
+  joinedAt           DateTime @default(now())
+  applicationAnswers Json?
+  status             String   @default("PENDING") // PENDING | APPROVED | REJECTED
+
+  // Roster Studio: custom public display for this roster entry (image, name,
+  // class/year, ordering, badge styling). displayName falls back to the
+  // linked User's name when null.
+  avatarUrl    String?
+  displayName  String?
+  className    String?
+  displayOrder Int     @default(0)
+  badgeColor   String?
+
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+  club Club  @relation(fields: [clubId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, clubId])
+}
+
+model Event {
+  id                String    @id @default(cuid())
+  title             String
+  description       String
+  location          String
+  startDate         DateTime
+  totalSeats        Int
+  createdAt         DateTime  @default(now())
+  clubId            String
+  imageUrl          String?
+  passType          String    @default("PASS")
+  formSchema        Json?
+  startTime         DateTime
+  endTime           DateTime?
+  capacity          Int
+  status            String    @default("PUBLISHED") // DRAFT | PUBLISHED | CANCELLED | COMPLETED
+  registrationOpen  Boolean   @default(true)
+  // When true the event detail page shows the live capacity bar (seats filled
+  // vs limit) and the "Event Full" state. Clubs can hide it if they prefer.
+  showCapacityLimit Boolean   @default(true)
+  // Shortlisting mode: students submit the application form as PENDING and
+  // receive a pass only after the club approves them (approve/reject from the
+  // responses / applications dashboard).
+  requiresApproval  Boolean   @default(false)
+  registrationFee   Float     @default(0)
+  pointsPerAttender Int       @default(10)
+
+  // Event finalization & points engine
+  isClosed            Boolean   @default(false)
+  finalizedAt         DateTime?
+  firstPlacePoints    Int       @default(50)
+  secondPlacePoints   Int       @default(30)
+  thirdPlacePoints    Int       @default(20)
+  firstPlaceWinnerId  String?
+  secondPlaceWinnerId String?
+  thirdPlaceWinnerId  String?
+  firstPlaceWinner    User?     @relation("FirstPlace", fields: [firstPlaceWinnerId], references: [id], onDelete: SetNull)
+  secondPlaceWinner   User?     @relation("SecondPlace", fields: [secondPlaceWinnerId], references: [id], onDelete: SetNull)
+  thirdPlaceWinner    User?     @relation("ThirdPlace", fields: [thirdPlaceWinnerId], references: [id], onDelete: SetNull)
+
+  // Team events
+  isTeamEvent       Boolean           @default(false)
+  minTeamSize       Int               @default(2)
+  maxTeamSize       Int               @default(4)
+  passStrategy      TeamPassStrategy? @default(CAPTAIN_ONLY)
+  firstPlaceTeamId  String?
+  secondPlaceTeamId String?
+  thirdPlaceTeamId  String?
+  firstPlaceTeam    Team?             @relation("FirstPlaceTeam", fields: [firstPlaceTeamId], references: [id], onDelete: SetNull)
+  secondPlaceTeam   Team?             @relation("SecondPlaceTeam", fields: [secondPlaceTeamId], references: [id], onDelete: SetNull)
+  thirdPlaceTeam    Team?             @relation("ThirdPlaceTeam", fields: [thirdPlaceTeamId], references: [id], onDelete: SetNull)
+
+  // External event verification (MakeMyPass / Google Forms / offline sheets)
+  verificationStatus VerificationStatus @default(NOT_REQUIRED)
+  regType            RegistrationType   @default(INTERNAL)
+  externalProvider   ExternalProvider?
+  externalRegUrl     String?
+  externalAttendees  ExternalAttendee[]
+
+  club          Club               @relation(fields: [clubId], references: [id], onDelete: Restrict)
+  registrations Registration[]
+  posts         ClubPost[]
+  pointLogs     PointTransaction[]
+  teams         Team[]             @relation("EventTeams")
+  savedBy       SavedEvent[]
+}
+
+model Registration {
+  id            String             @id @default(cuid())
+  userId        String
+  eventId       String
+  formResponses Json?
+  createdAt     DateTime           @default(now())
+  qrToken       String             @unique @default(dbgenerated("gen_random_uuid()"))
+  status        RegistrationStatus @default(REGISTERED)
+  attendedAt    DateTime?
+  pointsEarned  Int                @default(0)
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, eventId])
+}
+
+model Room {
+  id       String @id @default(cuid())
+  name     String @unique
+  capacity Int
+
+  bookings RoomBooking[]
+}
+
+model RoomBooking {
+  id        String        @id @default(cuid())
+  roomId    String
+  userId    String
+  reason    String
+  startTime DateTime
+  endTime   DateTime
+  status    BookingStatus @default(PENDING)
+  createdAt DateTime      @default(now())
+
+  room Room @relation(fields: [roomId], references: [id], onDelete: Restrict)
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
+}
+
+model RecruitmentGig {
+  id            String   @id @default(cuid())
+  clubId        String
+  roleTitle     String
+  description   String
+  tags          String[]
+  openPositions Int      @default(1)
+  createdAt     DateTime @default(now())
+
+  club Club @relation(fields: [clubId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  id        String     @id @default(cuid())
+  email     String
+  userId    String?
+  purpose   OtpPurpose @default(FORGOT_PASSWORD)
+  code      String
+  token     String?    @unique
+  expiresAt DateTime
+  createdAt DateTime   @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([email, purpose])
+}
+
+model ClubPost {
+  id        String   @id @default(cuid())
+  clubId    String
+  postType  PostType @default(ANNOUNCEMENT)
+  title     String
+  content   String   @db.Text
+  imageUrls String[]
+  eventId   String?
+
+  club        Club            @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  event       Event?          @relation(fields: [eventId], references: [id], onDelete: SetNull)
+  likes       PostLike[]
+  taggedUsers PostWinnerTag[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PostWinnerTag {
+  id         String  @id @default(cuid())
+  postId     String
+  userId     String
+  awardTitle String?
+
+  post ClubPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, userId])
+}
+
+/**
+ * Immutable ledger of every points event in the system:
+ * individual awards (participation + winner bonuses) and club awards
+ * (hosting + attendance volume), written atomically at event finalization.
+ */
+model Team {
+  id              String   @id @default(cuid())
+  name            String
+  joinCode        String   @unique // Join code, e.g. "K9X2PL"
+  eventId         String
+  leaderId        String
+  externalPassUrl String? // Captures single team link when strategy == CAPTAIN_ONLY
+  createdAt       DateTime @default(now())
+
+  event  Event @relation("EventTeams", fields: [eventId], references: [id], onDelete: Cascade)
+  leader User  @relation("TeamLeader", fields: [leaderId], references: [id], onDelete: Cascade)
+
+  members TeamMember[]
+
+  firstPlaceEvents  Event[] @relation("FirstPlaceTeam")
+  secondPlaceEvents Event[] @relation("SecondPlaceTeam")
+  thirdPlaceEvents  Event[] @relation("ThirdPlaceTeam")
+
+  @@unique([eventId, name])
+  @@index([eventId])
+}
+
+model TeamMember {
+  id              String   @id @default(cuid())
+  teamId          String
+  userId          String
+  externalPassUrl String? // Captures individual member link when strategy == INDIVIDUAL
+  joinedAt        DateTime @default(now())
+
+  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([teamId, userId])
+}
+
+model PointTransaction {
+  id        String      @id @default(cuid())
+  userId    String?
+  clubId    String?
+  eventId   String
+  points    Int
+  reason    String // PARTICIPATION, PARTICIPATION + 1ST_PLACE, HOSTED_EVENT, EXTERNAL ATTENDANCE, ...
+  status    PointStatus @default(ACTIVE)
+  createdAt DateTime    @default(now())
+
+  user  User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+  club  Club? @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([clubId])
+  @@index([eventId])
+}
+
+/**
+ * Attendee row uploaded by a club for an EXTERNAL event (MakeMyPass, Google
+ * Forms, offline sheets). No points are credited until an admin approves the
+ * event; at that point every email matching a registered User is credited
+ * (participation + winner bonus) and flagged isMatched. Winners are encoded
+ * via position ("1ST" | "2ND" | "3RD").
+ */
+model ExternalAttendee {
+  id        String   @id @default(cuid())
+  eventId   String
+  email     String
+  name      String?
+  position  String   @default("PARTICIPANT") // PARTICIPANT | 1ST | 2ND | 3RD
+  isMatched Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@index([eventId])
+}
+
+model PostLike {
+  id        String   @id @default(cuid())
+  postId    String
+  userId    String
+  createdAt DateTime @default(now())
+
+  post ClubPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, userId])
+}
+
+/**
+ * A student's bookmarked event. Used by the "Saved Upcoming Events" tab on
+ * the main dashboard. Deleting a user or an event cascades cleanly.
+ */
+model SavedEvent {
+  id        String   @id @default(cuid())
+  userId    String
+  eventId   String
+  createdAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, eventId])
+  @@index([userId])
+}

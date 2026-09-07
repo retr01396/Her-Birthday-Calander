@@ -1,0 +1,6 @@
+main_db:
+  host: mariadb
+  port: 3306
+  username: postal
+  password: your_db_password
+  database: postal
