@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { JOURNEY } from "@/lib/birthday/config";
 import { FloatingHeartsAmbient } from "./effects";
 import { DoodleBow, DoodleHeart } from "./doodles";
+import { getBgmAudio, startBgm, pauseBgm, isBgmPlaying } from "@/lib/birthday/bgm";
 
 /**
  * Shared scrapbook chrome for every birthday page:
@@ -18,6 +19,43 @@ export function BirthdayChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const day = pathname.match(/\/birthday\/day\/(\d+)/)?.[1];
+
+  // ── global background music ──────────────────────────────────
+  // Starts on her very first tap anywhere on the site, then keeps
+  // looping across every page navigation until the site is closed.
+  // Button state is synced from the audio element's own events, so
+  // it can never drift out of sync with what's actually playing.
+  const [bgmOn, setBgmOn] = useState(false);
+
+  useEffect(() => {
+    const a = getBgmAudio();
+    const sync = () => setBgmOn(!a.paused);
+    a.addEventListener("play", sync);
+    a.addEventListener("pause", sync);
+    sync();
+
+    function firstTap() {
+      startBgm();
+      window.removeEventListener("pointerdown", firstTap, true);
+      window.removeEventListener("keydown", firstTap, true);
+    }
+    window.addEventListener("pointerdown", firstTap, true);
+    window.addEventListener("keydown", firstTap, true);
+    return () => {
+      a.removeEventListener("play", sync);
+      a.removeEventListener("pause", sync);
+      window.removeEventListener("pointerdown", firstTap, true);
+      window.removeEventListener("keydown", firstTap, true);
+    };
+  }, []);
+
+  function toggleBgm() {
+    if (isBgmPlaying()) {
+      pauseBgm();
+    } else {
+      startBgm();
+    }
+  }
 
   return (
     <>
@@ -67,7 +105,50 @@ export function BirthdayChrome({ children }: { children: React.ReactNode }) {
       </AnimatePresence>
 
       <RunningCatCameo />
+      <BgmToggle on={bgmOn} onToggle={toggleBgm} />
     </>
+  );
+}
+
+/** Floating music note button — bottom-right, always reachable. */
+function BgmToggle({ on, onToggle }: { on: boolean; onToggle: () => void }) {
+  const spinning = on;
+  return (
+    <motion.button
+      type="button"
+      onClick={onToggle}
+      aria-label={on ? "Pause the music" : "Play the music"}
+      className="bday-paw fixed bottom-4 right-4 z-40 grid h-14 w-14 place-items-center rounded-full border-2 border-[color:var(--bday-coffee)]/20 bg-[color:var(--bday-paper)]/95 shadow-[0_4px_0_rgba(91,66,50,0.15),0_10px_24px_rgba(91,66,50,0.18)] backdrop-blur-sm active:scale-95"
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ type: "spring", stiffness: 200, damping: 16 }}
+    >
+      <motion.svg
+        viewBox="0 0 24 24"
+        width="26"
+        height="26"
+        animate={spinning ? { rotate: 360 } : { rotate: 0 }}
+        transition={spinning ? { repeat: Infinity, duration: 4, ease: "linear" } : {}}
+      >
+        {/* music note */}
+        <path
+          d="M9 18.5a3 3 0 1 1-2-2.83V6.5l11-2.3v3.1L10.5 9.3v8.2"
+          fill="none"
+          stroke="var(--bday-cocoa)"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <circle cx="7" cy="18" r="2.4" fill="var(--bday-rose)" />
+        <circle cx="18" cy="6.5" r="2.4" fill="var(--bday-rose)" />
+      </motion.svg>
+      {!on && (
+        <span
+          className="absolute h-full w-full rounded-full border-2 border-dashed border-[color:var(--bday-coffee)]/25"
+          aria-hidden="true"
+        />
+      )}
+    </motion.button>
   );
 }
 

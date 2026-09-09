@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -12,6 +12,7 @@ import {
   WORLD_HOTSPOT_EXTRAS as EXTRAS,
 } from "@/lib/birthday/config";
 import { BirthdayCat } from "./BirthdayCat";
+import { startBgm, pauseBgm, isBgmPlaying, getBgmAudio } from "@/lib/birthday/bgm";
 import {
   Burst,
   Confetti,
@@ -277,18 +278,28 @@ const lineVar = {
 
 /* ── MUSIC PLAYER — spinning record, loops until the site is closed ── */
 function MusicPlayerHotspot() {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [playing, setPlaying] = useState(false);
   const track = MUSIC.playlist[0];
   const reduced = useReducedMotion();
 
+  // Keep the hotspot UI in sync with the shared background music.
+  useEffect(() => {
+    const a = getBgmAudio();
+    const sync = () => setPlaying(!a.paused);
+    a.addEventListener("play", sync);
+    a.addEventListener("pause", sync);
+    sync();
+    return () => {
+      a.removeEventListener("play", sync);
+      a.removeEventListener("pause", sync);
+    };
+  }, []);
+
   function toggle() {
-    if (!audioRef.current) return;
-    if (playing) {
-      audioRef.current.pause();
-      setPlaying(false);
+    if (isBgmPlaying()) {
+      pauseBgm();
     } else {
-      audioRef.current.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+      startBgm();
     }
   }
 
@@ -320,7 +331,6 @@ function MusicPlayerHotspot() {
       </div>
 
       {/* loops forever until the tab/site is closed */}
-      {track && <audio ref={audioRef} src={track.src} loop preload="auto" />}
       <p className="bday-scrawl mt-3 text-xs opacity-50">plays on repeat ♡</p>
     </div>
   );
