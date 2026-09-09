@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Polaroid placeholder illustration">
+  <defs>
+    <linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f0e4d0"/>
+      <stop offset="1" stop-color="#f3d7d5"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#sky2)"/>
+  <ellipse cx="140" cy="300" rx="90" ry="16" fill="#d9b36c" opacity="0.35"/>
+  <path d="M100 300 v-90 M100 240 q-26 -10 -30 -34 q26 2 30 34 M100 220 q26 -10 30 -34 q-26 2 -30 34" stroke="#8a9a7c" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <circle cx="100" cy="196" r="20" fill="#e8b7b7" stroke="#c9808a" stroke-width="3"/>
+  <circle cx="100" cy="196" r="8" fill="#d9b36c"/>
+  <path d="M270 310 q20 -60 -10 -96 q44 10 40 66 q22 -18 40 -12 q-16 26 -46 34 q-16 6 -24 8Z" fill="#a8b79a" opacity="0.6"/>
+  <text x="200" y="392" font-family="cursive" font-size="15" fill="#8a6a52" text-anchor="middle">[another memory goes here]</text>
+</svg>

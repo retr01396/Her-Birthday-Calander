@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Polaroid placeholder illustration">
+  <defs>
+    <linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f3d7d5"/>
+      <stop offset="1" stop-color="#f7efe1"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#sky1)"/>
+  <circle cx="320" cy="80" r="34" fill="#f6d98a" opacity="0.8"/>
+  <path d="M0 320 Q100 260 200 300 T400 290 V400 H0 Z" fill="#a8b79a" opacity="0.55"/>
+  <path d="M0 350 Q120 300 240 335 T400 330 V400 H0 Z" fill="#8a9a7c" opacity="0.5"/>
+  <g transform="translate(180 220)">
+    <ellipse cx="0" cy="30" rx="34" ry="26" fill="#fdf8ef" stroke="#5b4232" stroke-width="3"/>
+    <circle cx="0" cy="-14" r="30" fill="#fdf8ef" stroke="#5b4232" stroke-width="3"/>
+    <path d="M-26 -34 L-34 -58 L-12 -44 Z" fill="#fdf8ef" stroke="#5b4232" stroke-width="3"/>
+    <path d="M26 -34 L34 -58 L12 -44 Z" fill="#fdf8ef" stroke="#5b4232" stroke-width="3"/>
+    <circle cx="-10" cy="-16" r="3.4" fill="#3f2d22"/>
+    <circle cx="10" cy="-16" r="3.4" fill="#3f2d22"/>
+    <ellipse cx="-16" cy="-6" rx="4" ry="2.4" fill="#e896a0" opacity="0.6"/>
+    <ellipse cx="16" cy="-6" rx="4" ry="2.4" fill="#e896a0" opacity="0.6"/>
+  </g>
+  <path d="M60 120 q10 -18 22 0 q-4 14 -22 20 q-18 -6 -22 -20 q12 -18 22 0" fill="#e8b7b7" opacity="0.7"/>
+  <path d="M330 180 q8 -14 18 0 q-3 11 -18 16 q-15 -5 -18 -16 q10 -14 18 0" fill="#e8b7b7" opacity="0.55"/>
+  <text x="200" y="392" font-family="cursive" font-size="15" fill="#8a6a52" text-anchor="middle">[replace me with a real memory ♡]</text>
+</svg>

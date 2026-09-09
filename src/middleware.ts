@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { isDayUnlocked, currentUnlockedDay } from "./lib/birthday/dates";
 
 async function getSessionInfo(req: NextRequest): Promise<{
   role: string | null;
@@ -25,8 +26,25 @@ async function getSessionInfo(req: NextRequest): Promise<{
 }
 
 export async function middleware(req: NextRequest) {
-  const { role, clubStatus } = await getSessionInfo(req);
   const path = req.nextUrl.pathname;
+
+  // ── Birthday journey guard ────────────────────────────────────
+  // Runs before auth so it applies to every visitor (the recipient
+  // won't be signed in). A locked (future) day can never be revealed
+  // by typing its URL: the unlock check re-runs on every request.
+  if (path.startsWith("/birthday/day/")) {
+    const day = Number(path.split("/")[3]);
+    if (!Number.isInteger(day) || !isDayUnlocked(day)) {
+      // Not unlocked yet — send them to the calendar instead of
+      // leaking any future content.
+      const url = new URL("/birthday/journey", req.url);
+      if (currentUnlockedDay() > 0) url.searchParams.set("locked", day.toString());
+      return NextResponse.redirect(url);
+    }
+    return NextResponse.next();
+  }
+
+  const { role, clubStatus } = await getSessionInfo(req);
 
   const isAuthenticated = role !== null;
   const isClubLoginPage = path.startsWith("/club/login");
@@ -73,5 +91,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/club/:path*"],
+  matcher: ["/admin/:path*", "/club/:path*", "/birthday/day/:path*"],
 };

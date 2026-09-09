@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Polaroid placeholder illustration">
+  <defs>
+    <linearGradient id="sky3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f3e2d4"/>
+      <stop offset="1" stop-color="#f7dcd6"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#sky3)"/>
+  <circle cx="90" cy="90" r="36" fill="#e9d9a6" opacity="0.85"/>
+  <path d="M0 330 Q90 290 180 320 T400 310 V400 H0 Z" fill="#c9a47c" opacity="0.45"/>
+  <g transform="translate(230 230)">
+    <ellipse cx="0" cy="0" rx="26" ry="34" fill="#fdf8ef" stroke="#5b4232" stroke-width="3"/>
+    <ellipse cx="-46" cy="-56" rx="16" ry="22" fill="#f3d7d5" stroke="#c9808a" stroke-width="3"/>
+    <ellipse cx="46" cy="-56" rx="16" ry="22" fill="#f3d7d5" stroke="#c9808a" stroke-width="3"/>
+    <circle cx="0" cy="-44" r="34" fill="#fdf8ef" stroke="#5b4232" stroke-width="3"/>
+    <path d="M-28 -68 L-38 -96 L-12 -80 Z" fill="#fdf8ef" stroke="#5b4232" stroke-width="3"/>
+    <path d="M28 -68 L38 -96 L12 -80 Z" fill="#fdf8ef" stroke="#5b4232" stroke-width="3"/>
+    <circle cx="-11" cy="-46" r="3.6" fill="#3f2d22"/>
+    <circle cx="11" cy="-46" r="3.6" fill="#3f2d22"/>
+    <path d="M-6 -34 q6 5 12 0" stroke="#3f2d22" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  </g>
+  <path d="M70 190 q9 -16 20 0 q-4 12 -20 18 q-16 -6 -20 -18 q11 -16 20 0" fill="#e8b7b7" opacity="0.6"/>
+  <text x="200" y="392" font-family="cursive" font-size="15" fill="#8a6a52" text-anchor="middle">[and one more]</text>
+</svg>
