@@ -250,7 +250,7 @@ export function RoseCinematicScene({ day }: { day: DayConfig }) {
         </div>
 
         <p className="bday-scrawl mt-2 text-center text-[15px] opacity-60">
-          {finale ? "for you. all of them. ♡" : "some flowers are worth a little drama..."}
+          {finale ? "for you. all of them. ♡" : "some flowers deserve a little drama..."}
         </p>
 
         {/* the day's real message — only after the full reveal */}
@@ -463,7 +463,7 @@ export function MoonScene({ day }: { day: DayConfig }) {
       </motion.div>
 
       <p className="bday-scrawl mt-2 text-center text-[15px] opacity-60">
-        {step === 0 ? "tap the sky..." : step < 4 ? "look up..." : "make a wish ♡"}
+        {step === 0 ? "tap the sky ♡" : step < 4 ? "look up..." : "did you make a wish? ♡"}
       </p>
 
       <AnimatePresence>

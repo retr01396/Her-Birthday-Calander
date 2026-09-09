@@ -331,7 +331,7 @@ function MusicPlayerHotspot() {
       </div>
 
       {/* loops forever until the tab/site is closed */}
-      <p className="bday-scrawl mt-3 text-xs opacity-50">plays on repeat ♡</p>
+      <p className="bday-scrawl mt-3 text-xs opacity-50">on repeat, forever ♡</p>
     </div>
   );
 }

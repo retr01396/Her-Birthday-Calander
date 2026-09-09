@@ -72,30 +72,30 @@ export const DAYS: DayConfig[] = [
     day: 1,
     title: "Flowers",
     kind: "flowers",
-    caption: "the very first one",
+    caption: "starting soft",
     heading: "Day 01 — Flowers",
-    message: "A little something to start.",
-    note: "for you, of course ♡",
+    message: "had to start with flowers. those are just the rules.",
+    note: "more where this came from ♡",
   },
   {
     day: 2,
     title: "Chocolates",
     kind: "chocolates",
-    caption: "sweet, like you",
+    caption: "you know which one i'd steal",
     heading: "Day 02 — Chocolates",
     message:
-      "I couldn't hand these to you in person, so I asked a small cat to help.",
-    note: "eat them slowly ♡",
+      "no occasion. day two just felt like it should be sweet. like someone else i know.",
+    note: "eat one for me ♡",
   },
   {
     day: 3,
     title: "Coffee",
     kind: "coffee",
-    caption: "our kind of morning",
+    caption: "you, me, coffee",
     heading: "Day 03 — Coffee",
     message:
-      "One cup for you, one for me. Even from far away, this is our table.",
-    note: "still warm ♡",
+      "imagine we're at the café and i keep stealing sips of yours. because i would.",
+    note: "yours has the heart on it ♡",
   },
   {
     day: 4,
@@ -104,17 +104,17 @@ export const DAYS: DayConfig[] = [
     caption: "softest thing here",
     heading: "Day 04 — Plushie",
     message:
-      "He's very fluffy and slightly dramatic. He'll keep you company when I can't.",
-    note: "his name is up to you",
+      "his whole job is to be hugged when i'm not there. he takes it very seriously.",
+    note: "name him something silly. he can't object",
   },
   {
     day: 5,
     title: "Little Gift",
     kind: "gift",
-    caption: "tied with ribbon",
+    caption: "wrapped it myself",
     heading: "Day 05 — A Little Gift",
-    message: "I wrapped this by hand. (The cat supervised.)",
-    note: "open gently ♡",
+    message: "wrapped it myself. the cat 'helped'.",
+    note: "it's small but it took forever ♡",
   },
   {
     day: 6,
@@ -123,7 +123,7 @@ export const DAYS: DayConfig[] = [
     caption: "handwritten, mostly",
     heading: "Day 06 — A Love Letter",
     message: "", // rendered from LETTERS.loveLetter below
-    note: "read it twice ♡",
+    note: "take your time with this one ♡",
   },
   {
     day: 7,
@@ -131,8 +131,8 @@ export const DAYS: DayConfig[] = [
     kind: "roses",
     caption: "they don't wilt here",
     heading: "Day 07 — Roses",
-    message: "These ones never wilt. Like some other things I know.",
-    note: "dozen, obviously",
+    message: "got you the kind that don't die. felt appropriate.",
+    note: "a dozen, obviously",
   },
   {
     day: 8,
@@ -140,8 +140,8 @@ export const DAYS: DayConfig[] = [
     kind: "memory",
     caption: "polaroids & tape",
     heading: "Day 08 — Memory",
-    message: "A page from our scrapbook. Click a photo to look closer.",
-    note: "more to add ♡",
+    message: "a few of my favorites. tap them, they like the attention ♡",
+    note: "more to add later",
   },
   {
     day: 9,
@@ -159,8 +159,8 @@ export const DAYS: DayConfig[] = [
     caption: "ribbon-wrapped secret",
     heading: "Day 10 — Mystery Gift",
     message:
-      "No hints. No shaking the box. You'll find out with everything else.",
-    note: "be patient ♡",
+      "you can look. no shaking though. i know how you are.",
+    note: "i can hear you thinking about it",
   },
   {
     day: 11,
@@ -169,8 +169,8 @@ export const DAYS: DayConfig[] = [
     caption: "same sky, both of us",
     heading: "Day 11 — Moon & Stars",
     message:
-      "When you miss me tonight, look up. We're under the same one.",
-    note: "make a wish",
+      "same moon out my window too. wave if you're up ♡",
+    note: "look up tonight, for real",
   },
   {
     day: 12,
@@ -179,7 +179,7 @@ export const DAYS: DayConfig[] = [
     caption: "do NOT open early",
     heading: "Day 12 — Sealed Letter",
     message: "OPEN TOMORROW ♡",
-    note: "I mean it",
+    note: "i'm watching. no peeking",
   },
   {
     day: 13,
@@ -188,7 +188,7 @@ export const DAYS: DayConfig[] = [
     caption: "the whole point ♡",
     heading: "Day 13 — Birthday",
     message: "You made it.",
-    note: "happy birthday",
+    note: "the big one ♡",
   },
 ];
 
@@ -213,13 +213,13 @@ export const mainBirthdayLetter = {
 
 export const LETTERS = {
   loveLetter: {
-    greeting: "My dearest,",
+    greeting: "hey you,",
     paragraphs: [
-      "Six days in, and you've opened every little door I made for you. I hope you're smiling — that was the whole point of all this.",
-      "I wanted each of these days to feel like a small hand on your shoulder, reminding you that someone out here thinks you're wonderful.",
-      // "[Replace this paragraph with your own words.]",
+      "if you're reading this, you've made it to day six. which means you've been clicking around this little site i made you — and honestly, that's all i wanted.",
+      "i'm not great at saying sappy stuff out loud. i overthink it, it comes out weird, we laugh. so i figured i'd write it down where i can't fumble it.",
+      "you make regular days feel like something worth remembering. that's it. that's the whole letter. the rest is hiding in the next seven days ♡",
     ],
-    closing: "Yours, always ♡",
+    closing: "yours, obviously ♡",
     signature: "— me",
   },
   birthdayLetter: mainBirthdayLetter,
@@ -274,7 +274,7 @@ export interface Track {
 
 export const MUSIC = {
   heading: "Vintage Music Player",
-  hint: "press play — it won't start on its own ♡",
+  hint: "our song — it's been playing since you got here ♡",
   /** loops forever until the site is closed */
   loop: true,
   playlist: [
@@ -317,14 +317,14 @@ export const BIG_GIFT = {
 // ── Little world room copy ─────────────────────────────────────
 export const WORLD = {
   title: "Our Little World",
-  hint: "click around the room — everything here is yours",
+  hint: "go on, poke around. everything in here is yours ♡",
   hotspots: {
-    photoWall: { label: "Photo Wall", message: "Every photo here is a day I'd relive." },
+    photoWall: { label: "Photo Wall", message: "i keep coming back to these. now you can too." },
     birthdayLetter: { label: "Birthday Letter", message: "" }, // renders LETTERS.birthdayLetter
     musicPlayer: { label: "Music Player", message: "" }, // renders MUSIC
-    coffeeMug: { label: "Coffee Mug", message: "Still warm. Just like always ♡" },
-    plushie: { label: "Plushie", message: "Hug received. Hug returned ♡" },
-    nightWindow: { label: "Night Window", message: "Same moon, same sky, same me." },
+    coffeeMug: { label: "Coffee Mug", message: "made it how you like it. don't tell me i got it wrong" },
+    plushie: { label: "Plushie", message: "he's been waiting here all week. go on ♡" },
+    nightWindow: { label: "Night Window", message: "it's always night in here. i don't make the rules ♡" },
     giftBox: { label: "The Big Gift", message: "" }, // renders BIG_GIFT flow
   },
 };
@@ -336,13 +336,13 @@ export const FINALE = {
   headline: "HAPPY BIRTHDAY, MY LOVE ♡",
   subheading:
     "I wanted to give you something that would last longer than a single day.",
-  enterWorld: "Enter our little world ♡",
+  enterWorld: "there's one more room for you ♡",
 };
 
 // ── Day 7 — the rose cinematic ─────────────────────────────────
 export const ROSE_CINEMATIC = {
   wait: "wait...",
-  after: "Some flowers are worth making a little dramatic. ♡",
+  after: "okay maybe i went overboard. you're worth overboard ♡",
 };
 
 // ── Day 10 — the mystery box refuses ───────────────────────────

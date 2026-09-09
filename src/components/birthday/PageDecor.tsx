@@ -318,17 +318,17 @@ function SleepingCat({ className }: { className?: string }) {
 /* ── per-theme note text ─────────────────────────────────────── */
 const THEME_NOTES: Record<DecorTheme, string[]> = {
   roses: ["roses for my favorite girl ♡", "pretty things remind me of you", "just because ♡"],
-  flowers: ["picked these for you ♡", "the first of many", "hi, it's me ♡"],
-  chocolates: ["sweeter than these, obviously", "open carefully ♡", "a little treat"],
-  coffee: ["you + me + coffee ♡", "our kind of morning", "still warm"],
-  plushie: ["softest boy award ♡", "he watches you sleep (nicely)", "hug certified"],
-  gift: ["tied with love ♡", "no peeking early", "small but yours"],
-  letter: ["read slowly ♡", "every word is true", "sealed with a kiss"],
-  memory: ["remember this one? ♡", "my favorite day", "more to come"],
+  flowers: ["day one!! ♡", "starting you off right", "hi it's me ♡"],
+  chocolates: ["you get the last one. maybe", "careful, it melts", "a little treat"],
+  coffee: ["you + me + coffee ♡", "our kind of morning", "no we can't have a cat at the café"],
+  plushie: ["softest boy award ♡", "he's a good listener", "hug certified"],
+  gift: ["tied it myself ♡", "no shaking", "small but cute. like something else i know"],
+  letter: ["read slowly ♡", "yes i meant all of it", "seal was harder than it looks"],
+  memory: ["remember this one? ♡", "my favorite day", "we need more pictures"],
   heart: ["it's yours ♡", "handle with care", "almost there"],
-  mystery: ["no shaking allowed ♡", "hmm...", "the cat knows"],
-  moon: ["same moon, same me ♡", "wish here →", "goodnight, little star"],
-  sealed: ["NOT yet ♡ (seriously)", "tomorrow, promise", "patience, love"],
+  mystery: ["no shaking allowed ♡", "nice try", "even the cat doesn't know"],
+  moon: ["same moon, same me ♡", "make a real wish →", "goodnight, little star"],
+  sealed: ["NOT yet ♡ (seriously)", "tomorrow. i promise", "patience, love"],
   birthday: ["the best day ♡", "all of it is yours", "make a wish!"],
 };
 

@@ -150,7 +150,7 @@ export function FlowersScene({ day }: SceneProps) {
         </motion.div>
       </Stage>
 
-      <Hint>{step === 0 ? "tap the bouquet..." : "for you ♡"}</Hint>
+      <Hint>{step === 0 ? "tap the bouquet ♡" : "all yours ♡"}</Hint>
 
       <AnimatePresence>
         {step >= 2 && (
@@ -267,7 +267,7 @@ export function ChocolatesScene({ day }: SceneProps) {
       </Stage>
 
       <Hint>
-        {step === 0 ? "tap to open the box..." : step < 3 ? "just a second..." : "all yours ♡"}
+        {step === 0 ? "tap the box ♡" : step < 3 ? "hold on, it's coming..." : "all yours. share with no one"}
       </Hint>
       <RevealMessage show={step >= 3} note={day.note}>
         {day.message}
@@ -366,7 +366,7 @@ export function CoffeeScene({ day }: SceneProps) {
         </div>
       </Stage>
 
-      <Hint>{step >= 2 ? "just the way you like it ♡" : "tap the cup..."}</Hint>
+      <Hint>{step >= 2 ? "made it how you like it ♡" : "tap the cup ♡"}</Hint>
       <RevealMessage show={step >= 2} note={day.note}>
         {day.message}
       </RevealMessage>
@@ -488,7 +488,7 @@ export function PlushieScene({ day }: SceneProps) {
       </Stage>
 
       <Hint>
-        {step === 0 ? "tap the bunny ❤" : step < 3 ? "here he comes..." : "hug accepted ♡"}
+        {step === 0 ? "tap the bunny!! ❤" : step < 3 ? "wait for it..." : "hug accepted. he's yours now ♡"}
       </Hint>
       <RevealMessage show={step >= 3} note={day.note}>
         {day.message}
@@ -596,7 +596,7 @@ export function GiftScene({ day }: SceneProps) {
       </Stage>
 
       <Hint>
-        {step === 0 ? "tap to open..." : step < 3 ? "ooh..." : step === 4 ? "wait, where did the cat go?" : "peek! ♡"}
+        {step === 0 ? "tap it, open it ♡" : step < 3 ? "ooh—" : step === 4 ? "wait where'd the cat go" : "there he is lol ♡"}
       </Hint>
       <RevealMessage
         show={step >= 5}
@@ -714,7 +714,7 @@ export function LetterScene({ day }: SceneProps) {
         </div>
       </Stage>
 
-      <Hint>{step === 0 ? "tap the envelope..." : "from me, to you ♡"}</Hint>
+      <Hint>{step === 0 ? "a letter? for me? tap ♡" : "from me, obviously ♡"}</Hint>
 
       {/* full unfolded letter */}
       <AnimatePresence>
@@ -1047,7 +1047,7 @@ export function MysteryScene({ day }: SceneProps) {
         </div>
       </Stage>
 
-      <Hint>{step === 0 ? "tap the box (it won't open)..." : ""}</Hint>
+      <Hint>{step === 0 ? "tap it. it won't open, promise" : ""}</Hint>
 
       <AnimatePresence>
         {step >= 5 && (

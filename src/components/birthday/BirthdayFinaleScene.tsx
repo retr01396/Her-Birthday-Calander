@@ -272,7 +272,7 @@ function CakeInteractive() {
       </AnimatePresence>
 
       <p className="bday-scrawl mt-1 text-sm opacity-60">
-        {lit ? "tap the candles to make a wish ♡" : "wish granted ♡"}
+        {lit ? "tap the candles — make it a good wish ♡" : "wish locked in ♡"}
       </p>
     </div>
   );
