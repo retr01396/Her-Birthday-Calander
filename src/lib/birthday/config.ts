@@ -248,21 +248,18 @@ export const MEMORIES: { heading: string; photos: MemoryPhoto[] } = {
   heading: "Our Little Scrapbook",
   photos: [
     {
-      image: "/birthday/photos/polaroid-1.svg",
-      caption: "replace me with a real memory ♡",
-      date: "September 1",
-      tilt: -4,
+      image: "/birthday/photos/photo-1.jpg",
+      caption: "",
+      tilt: -3,
     },
     {
-      image: "/birthday/photos/polaroid-2.svg",
-      caption: "another one goes here",
-      date: "September 4",
-      tilt: 3,
+      image: "/birthday/photos/photo-2.jpg",
+      caption: "",
+      tilt: 2,
     },
     {
-      image: "/birthday/photos/polaroid-3.svg",
-      caption: "and one more",
-      date: "September 7",
+      image: "/birthday/photos/photo-3.jpg",
+      caption: "",
       tilt: -2,
     },
   ],
@@ -278,17 +275,13 @@ export interface Track {
 export const MUSIC = {
   heading: "Vintage Music Player",
   hint: "press play — it won't start on its own ♡",
-  // Replace with your own audio files / URLs (mp3 links you own)
+  /** loops forever until the site is closed */
+  loop: true,
   playlist: [
     {
-      title: "Your First Song",
-      artist: "replace me",
-      src: "/birthday/audio/track-1.mp3",
-    },
-    {
-      title: "Your Second Song",
-      artist: "replace me",
-      src: "/birthday/audio/track-2.mp3",
+      title: "our little song",
+      artist: "lofi ♡",
+      src: "/birthday/audio/lofi.mp3",
     },
   ] as Track[],
 };

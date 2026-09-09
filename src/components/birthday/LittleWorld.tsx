@@ -187,10 +187,12 @@ function PhotoWallHotspot() {
             onClick={() => setOpenIdx(i)}
           >
             <PolaroidImage photo={p} />
-            <figcaption className="bday-scrawl mt-1.5 break-words text-center text-xs">
-              {p.caption}
-              {p.date && <span className="block opacity-55">{p.date}</span>}
-            </figcaption>
+            {(p.caption || p.date) && (
+              <figcaption className="bday-scrawl mt-1.5 break-words text-center text-xs">
+                {p.caption}
+                {p.date && <span className="block opacity-55">{p.date}</span>}
+              </figcaption>
+            )}
           </motion.figure>
         ))}
       </div>
@@ -217,14 +219,16 @@ function PhotoWallHotspot() {
               onClick={(e) => e.stopPropagation()}
             >
               <PolaroidImage photo={MEMORIES.photos[openIdx]} className="max-h-[55vh] w-full rounded-sm object-cover" />
-              <motion.figcaption
-                className="bday-hand mt-3 text-center text-xl"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.35 }}
-              >
-                {MEMORIES.photos[openIdx].caption}
-              </motion.figcaption>
+              {MEMORIES.photos[openIdx].caption && (
+                <motion.figcaption
+                  className="bday-hand mt-3 text-center text-xl"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.35 }}
+                >
+                  {MEMORIES.photos[openIdx].caption}
+                </motion.figcaption>
+              )}
               <motion.span
                 className="absolute -right-3 -top-3"
                 initial={{ scale: 0 }}
@@ -271,12 +275,11 @@ const lineVar = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-/* ── MUSIC PLAYER — spinning record ───────────────────────────── */
+/* ── MUSIC PLAYER — spinning record, loops until the site is closed ── */
 function MusicPlayerHotspot() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [playing, setPlaying] = useState(false);
-  const [trackIdx, setTrackIdx] = useState(0);
-  const track = MUSIC.playlist[trackIdx];
+  const track = MUSIC.playlist[0];
   const reduced = useReducedMotion();
 
   function toggle() {
@@ -287,11 +290,6 @@ function MusicPlayerHotspot() {
     } else {
       audioRef.current.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
     }
-  }
-
-  function next() {
-    setPlaying(false);
-    setTrackIdx((i) => (i + 1) % MUSIC.playlist.length);
   }
 
   return (
@@ -314,20 +312,16 @@ function MusicPlayerHotspot() {
             <p className="bday-scrawl text-sm opacity-60">{track?.artist}</p>
           </div>
         </div>
-        <div className="mt-4 flex justify-center gap-3">
-          <motion.button whileTap={{ scale: 0.9 }} onClick={toggle} className="bday-btn bday-btn--quiet !min-h-[44px] !px-5 !text-lg">
+        <div className="mt-4 flex justify-center">
+          <motion.button whileTap={{ scale: 0.9 }} onClick={toggle} className="bday-btn bday-btn--quiet !min-h-[44px] !px-6 !text-lg">
             {playing ? "❚❚ pause" : "▶ play"}
-          </motion.button>
-          <motion.button whileTap={{ scale: 0.9 }} onClick={next} className="bday-btn bday-btn--quiet !min-h-[44px] !px-5 !text-lg">
-            →
           </motion.button>
         </div>
       </div>
 
-      {track && <audio ref={audioRef} src={track.src} onEnded={next} preload="none" />}
-      <p className="bday-scrawl mt-3 text-xs opacity-50">
-        (drop your songs into /public/birthday/audio and list them in config.ts)
-      </p>
+      {/* loops forever until the tab/site is closed */}
+      {track && <audio ref={audioRef} src={track.src} loop preload="auto" />}
+      <p className="bday-scrawl mt-3 text-xs opacity-50">plays on repeat ♡</p>
     </div>
   );
 }

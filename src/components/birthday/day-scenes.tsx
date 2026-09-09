@@ -797,9 +797,11 @@ export function MemoryScene({ day }: SceneProps) {
             aria-label={`Open photo: ${photo.caption}`}
           >
             <PolaroidImage photo={photo} />
-            <p className="bday-scrawl mt-2 break-words text-center text-sm text-[color:var(--bday-coffee)]">
-              {photo.caption}
-            </p>
+            {photo.caption && (
+              <p className="bday-scrawl mt-2 break-words text-center text-sm text-[color:var(--bday-coffee)]">
+                {photo.caption}
+              </p>
+            )}
             {photo.date && (
               <p className="bday-scrawl text-center text-xs opacity-55">{photo.date}</p>
             )}
@@ -839,19 +841,21 @@ export function MemoryScene({ day }: SceneProps) {
                 transition={{ delay: 0.25 }}
               />
               <PolaroidImage photo={MEMORIES.photos[openIdx]} className="max-h-[55vh] w-full rounded-sm object-cover" />
-              <motion.figcaption
-                className="bday-hand mt-3 text-center text-xl"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
-              >
-                {MEMORIES.photos[openIdx].caption}
-                {MEMORIES.photos[openIdx].date && (
-                  <span className="bday-scrawl ml-2 text-sm opacity-55">
-                    · {MEMORIES.photos[openIdx].date}
-                  </span>
-                )}
-              </motion.figcaption>
+              {(MEMORIES.photos[openIdx].caption || MEMORIES.photos[openIdx].date) && (
+                <motion.figcaption
+                  className="bday-hand mt-3 text-center text-xl"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.4 }}
+                >
+                  {MEMORIES.photos[openIdx].caption}
+                  {MEMORIES.photos[openIdx].date && (
+                    <span className="bday-scrawl ml-2 text-sm opacity-55">
+                      · {MEMORIES.photos[openIdx].date}
+                    </span>
+                  )}
+                </motion.figcaption>
+              )}
               {/* sparkles + one floating heart */}
               <motion.span
                 className="absolute -right-3 -top-3"
