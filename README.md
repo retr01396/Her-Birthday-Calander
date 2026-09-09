@@ -38,5 +38,5 @@ Music: replace `public/birthday/audio/lofi.mp3` (plays on loop).
 
 ## Deploying
 
-Deploys as a normal Next.js app (e.g. Vercel) with zero environment
-variables required.
+Deployed on Vercel
+
