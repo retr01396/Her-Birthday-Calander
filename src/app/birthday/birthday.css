@@ -1,8 +1,8 @@
 /* ═══════════════════════════════════════════════════════════════
    13 LITTLE DAYS — scrapbook styles
    Warm cream/beige base, dusty blush pink accents, coffee brown
-   ink, paper grain, washi tape, soft shadows. Scoped under
-   .bday-root so the CampusHub styles are untouched.
+   ink, paper grain, washi tape, soft shadows. All styles scoped
+   under .bday-root so nothing leaks outside the birthday experience.
    ═══════════════════════════════════════════════════════════════ */
 
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Gochi+Hand&family=Patrick+Hand&display=swap");
@@ -30,11 +30,6 @@
   font-family: "Patrick Hand", "Comic Sans MS", cursive;
   font-size: 17px;
   line-height: 1.55;
-  padding-top: 0; /* override CampusHub main padding via own container */
-}
-
-/* Cancel the CampusHub main padding inside our layout only */
-main:has(> .bday-root) {
   padding-top: 0;
 }
 
