@@ -257,7 +257,7 @@ function BirthdayLetterHotspot() {
       variants={{ show: { transition: { staggerChildren: 0.25 } } }}
     >
       <motion.h3 variants={lineVar} className="bday-h2 mb-3 text-center">{L.title}</motion.h3>
-      <motion.p variants={lineVar} className="bday-hand text-xl">{L.greeting}</motion.p>
+      {L.greeting && <motion.p variants={lineVar} className="bday-hand text-xl">{L.greeting}</motion.p>}
       {L.paragraphs.map((p, i) => (
         <motion.p key={i} variants={lineVar} className="mt-2">{p}</motion.p>
       ))}

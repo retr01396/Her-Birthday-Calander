@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { FINALE } from "@/lib/birthday/config";
+import { FINALE, LETTERS } from "@/lib/birthday/config";
 import { BirthdayCat } from "./BirthdayCat";
 import { Confetti, DoodleDivider, RisingParticles, useReducedMotion } from "./effects";
 import {
@@ -30,6 +30,7 @@ export function BirthdayFinaleScene() {
   const reduced = useReducedMotion();
   const [phase, setPhase] = useState<Phase>("opening");
   const [count, setCount] = useState(3);
+  const [letterOpen, setLetterOpen] = useState(false);
 
   useEffect(() => {
     if (phase !== "opening") return;
@@ -49,6 +50,12 @@ export function BirthdayFinaleScene() {
     const t = setTimeout(() => setCount((c) => c - 1), 1000);
     return () => clearTimeout(t);
   }, [phase, count]);
+
+  useEffect(() => {
+    if (phase !== "party") return;
+    const t = setTimeout(() => setLetterOpen(true), reduced ? 150 : 700);
+    return () => clearTimeout(t);
+  }, [phase, reduced]);
 
   return (
     <div className="bday-center overflow-hidden">
@@ -121,6 +128,8 @@ export function BirthdayFinaleScene() {
               <p className="bday-message mt-3 opacity-80">{FINALE.subheading}</p>
               <DoodleDivider className="my-5" />
             </div>
+
+            <AutoOpenBirthdayLetter open={letterOpen} letter={LETTERS.birthdayLetter} />
 
             {/* full illustrated birthday scene */}
             <div className="bday-paper-card bday-taped relative mt-6 overflow-hidden pt-8">
@@ -195,6 +204,69 @@ export function BirthdayFinaleScene() {
         )}
       </AnimatePresence>
     </div>
+  );
+}
+
+/** A sealed envelope opens itself, then unfolds the full birthday letter. */
+function AutoOpenBirthdayLetter({
+  open,
+  letter,
+}: {
+  open: boolean;
+  letter: (typeof LETTERS)["birthdayLetter"];
+}) {
+  return (
+    <motion.div
+      className="mx-auto mt-6 w-full max-w-[760px]"
+      initial={{ opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
+      <div className="relative mx-auto h-44 w-full max-w-[34rem]">
+        <div className="absolute inset-0 rounded-xl border-2 border-[color:var(--bday-coffee)]/20 bg-[color:var(--bday-paper)] shadow-lg" />
+        <motion.div
+          className="absolute inset-x-0 top-0 h-1/2 origin-top rounded-t-xl"
+          style={{
+            background: "var(--bday-cream-deep)",
+            clipPath: "polygon(0 0, 100% 0, 50% 100%)",
+            backfaceVisibility: "hidden",
+          }}
+          animate={open ? { rotateX: 170, opacity: 0.35 } : { rotateX: 0, opacity: 1 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute inset-x-4 top-2 rounded-xl border border-[color:var(--bday-coffee)]/15 bg-[#fffdf8] shadow-md"
+          style={{ minHeight: 94 }}
+          animate={open ? { y: -70, opacity: 1 } : { y: 26, opacity: 0 }}
+          transition={{ type: "spring", stiffness: 90, damping: 14, delay: 0.15 }}
+        >
+          <div className="bday-letter-lines px-4 py-3 text-left">
+            <p className="mt-1 text-[13px] leading-5 text-[color:var(--bday-coffee)]">{letter.paragraphs[0]}</p>
+          </div>
+        </motion.div>
+      </div>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: 30, rotate: -1 }}
+            animate={{ opacity: 1, y: 0, rotate: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="bday-paper-card bday-taped bday-letter-lines mt-6 w-full"
+          >
+            <h3 className="bday-h2 mb-3 text-center">{letter.title}</h3>
+            {letter.paragraphs.map((p, index) => (
+              <p key={index} className="mt-2 whitespace-pre-line">{p}</p>
+            ))}
+            <p className="bday-hand mt-5 text-right text-xl text-[color:var(--bday-rose-deep)]">
+              {letter.closing}
+              <span className="bday-scrawl ml-2 text-base text-[color:var(--bday-coffee-soft)]">{letter.signature}</span>
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 }
 
